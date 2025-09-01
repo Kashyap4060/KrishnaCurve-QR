@@ -120,10 +120,10 @@
             <div style="margin-bottom: 15px; opacity: 0.8;">
                 If you are not redirected, click here:
             </div>
-            <a href="https://apps.apple.com/in/app/club-curve/id6744392234" class="store-button">
+            <a href="https://apps.apple.com/in/app/club-curve/id6744392234" class="store-button" onclick="trackManualClick('iOS')">
                 📱 App Store (iOS)
             </a>
-            <a href="https://play.google.com/store/apps/details?id=com.krishnacurve.krishnacurve" class="store-button">
+            <a href="https://play.google.com/store/apps/details?id=com.krishnacurve.krishnacurve" class="store-button" onclick="trackManualClick('Android')">
                 🤖 Google Play (Android)
             </a>
         </div>
@@ -136,16 +136,40 @@
     </div>
 
     <script>
+        // IMPORTANT: REPLACE THIS URL WITH YOUR DEPLOYED GOOGLE APPS SCRIPT WEB APP URL
+        const GOOGLE_APPS_SCRIPT_URL = https://script.google.com/macros/s/AKfycbw0IyevL19S6_x16X8zOFJip8CT2kl92zPzuaeNNmijsKtYGtO9lWO0vvNc077dtoc/exec;
+
         // App store links
         const IOS_LINK = 'https://apps.apple.com/in/app/club-curve/id6744392234';
         const ANDROID_LINK = 'https://play.google.com/store/apps/details?id=com.krishnacurve.krishnacurve';
         
-        // Get user agent
+        // Generate a session ID once per page load
+        const sessionId = 'session_' + Math.random().toString(36).substr(2, 9);
         const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+        
+        // This function sends analytics data to a Google Sheet via a Google Apps Script.
+        async function sendAnalyticsData(data) {
+            console.log('Preparing to send data to Google Sheet:', data);
+            
+            // Construct a URL with query parameters
+            const params = new URLSearchParams(data);
+            const url = `${GOOGLE_APPS_SCRIPT_URL}?${params.toString()}`;
+            
+            try {
+                // Use fetch with 'GET' method, as Google Apps Script's doGet function handles this
+                const response = await fetch(url, { method: 'GET' });
+                if (response.ok) {
+                    console.log('Analytics data sent to Google Sheet successfully.');
+                } else {
+                    console.error('Failed to send analytics data to Google Sheet.', response.status);
+                }
+            } catch (error) {
+                console.error('Error sending analytics data:', error);
+            }
+        }
         
         // Update stats display
         function updateStats() {
-            const sessionId = 'session_' + Math.random().toString(36).substr(2, 9);
             document.getElementById('session-id').textContent = sessionId;
             document.getElementById('user-agent').textContent = userAgent.substring(0, 50) + '...';
             document.getElementById('timestamp').textContent = new Date().toLocaleString();
@@ -194,8 +218,33 @@
             // Update UI to show detected platform
             document.getElementById('platform').textContent = platform;
 
+            // Send analytics data for the automatic redirect
+            const analyticsData = {
+                sessionId: sessionId,
+                type: 'auto_redirect',
+                platform: platform,
+                timestamp: new Date().toISOString(),
+                userAgent: userAgent,
+                referrer: document.referrer
+            };
+            sendAnalyticsData(analyticsData);
+
             // Immediately redirect the user
             window.location.href = redirectInfo.url;
+        }
+
+        // Handle manual click analytics
+        function trackManualClick(platform) {
+            const analyticsData = {
+                sessionId: sessionId,
+                type: 'manual_click',
+                platform: platform,
+                timestamp: new Date().toISOString(),
+                userAgent: userAgent,
+                referrer: document.referrer
+            };
+            sendAnalyticsData(analyticsData);
+            // The browser will handle the redirect via the <a> tag's href
         }
         
         // Start the redirect process when the page loads
