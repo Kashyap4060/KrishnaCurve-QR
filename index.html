@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Club Curve - Download App</title>
+    <meta name="description" content="Download the Club Curve app for iOS and Android">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://clubcurvedynamicqr.dpdns.org/">
+    <meta property="og:title" content="Club Curve - Download App">
+    <meta property="og:description" content="Get the Club Curve app for the best experience!">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://clubcurvedynamicqr.dpdns.org/">
+    <meta property="twitter:title" content="Club Curve - Download App">
+    <meta property="twitter:description" content="Get the Club Curve app for the best experience!">
+    
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 400px;
+            width: 100%;
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .logo {
+            width: 100px;
+            height: 100px;
+            background: white;
+            border-radius: 20px;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+            color: #667eea;
+            font-weight: bold;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        h1 {
+            margin: 20px 0;
+            font-size: 28px;
+            font-weight: 700;
+        }
+
+        .description {
+            margin: 20px 0;
+            font-size: 16px;
+            opacity: 0.9;
+            line-height: 1.5;
+        }
+
+        .redirect-info {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 15px;
+            margin: 20px 0;
+            font-size: 14px;
+        }
+
+        .manual-links {
+            margin-top: 30px;
+        }
+
+        .store-button {
+            display: inline-block;
+            margin: 10px;
+            padding: 12px 24px;
+            background: rgba(255, 255, 255, 0.9);
+            color: #333;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: 600;
+            transition: transform 0.2s, background 0.2s;
+            border: none;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .store-button:hover {
+            transform: translateY(-2px);
+            background: white;
+        }
+
+        .loading {
+            margin: 20px 0;
+        }
+
+        .spinner {
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top: 3px solid white;
+            width: 30px;
+            height: 30px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .countdown {
+            font-size: 18px;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+
+        .stats {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 15px;
+            margin-top: 20px;
+            font-size: 12px;
+            opacity: 0.8;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 2px;
+            margin: 10px 0;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: white;
+            border-radius: 2px;
+            transition: width 1s linear;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo">CC</div>
+        <h1>Club Curve</h1>
+        <div class="description">
+            Get the Club Curve app for the best experience!
+        </div>
+        
+        <div id="loading" class="loading">
+            <div class="spinner"></div>
+            <div class="redirect-info">
+                <div class="countdown">Redirecting in <span id="countdown">3</span> seconds...</div>
+                <div class="progress-bar">
+                    <div id="progress" class="progress-fill" style="width: 100%;"></div>
+                </div>
+                <div>Detected: <span id="platform">Detecting device...</span></div>
+                <div>Redirecting to: <span id="store">App Store</span></div>
+            </div>
+        </div>
+
+        <div class="manual-links">
+            <div style="margin-bottom: 15px; opacity: 0.8;">
+                Or choose your platform manually:
+            </div>
+            <a href="https://apps.apple.com/in/app/club-curve/id6744392234" class="store-button" onclick="trackClick('manual', 'ios')">
+                📱 App Store (iOS)
+            </a>
+            <a href="https://play.google.com/store/apps/details?id=com.krishnacurve.krishnacurve" class="store-button" onclick="trackClick('manual', 'android')">
+                🤖 Google Play (Android)
+            </a>
+        </div>
+
+        <div class="stats" id="stats">
+            <div>Session: <span id="session-id"></span></div>
+            <div>User Agent: <span id="user-agent"></span></div>
+            <div>Timestamp: <span id="timestamp"></span></div>
+        </div>
+    </div>
+
+    <script>
+        // App store links
+        const IOS_LINK = 'https://apps.apple.com/in/app/club-curve/id6744392234';
+        const ANDROID_LINK = 'https://play.google.com/store/apps/details?id=com.krishnacurve.krishnacurve';
+        
+        // Generate session ID
+        const sessionId = 'session_' + Math.random().toString(36).substr(2, 9);
+        
+        // Get user agent
+        const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+        
+        // Update stats display
+        document.getElementById('session-id').textContent = sessionId;
+        document.getElementById('user-agent').textContent = userAgent.substring(0, 50) + '...';
+        document.getElementById('timestamp').textContent = new Date().toLocaleString();
+        
+        // Detect platform
+        function detectPlatform() {
+            // iOS detection (including iPad)
+            if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+                return 'iOS';
+            }
+            
+            // Android detection
+            if (/android/i.test(userAgent)) {
+                return 'Android';
+            }
+            
+            // Desktop/Unknown - default to Android (you can change this)
+            return 'Android';
+        }
+        
+        // Get redirect URL and store name
+        function getRedirectInfo(platform) {
+            if (platform === 'iOS') {
+                return {
+                    url: IOS_LINK,
+                    store: 'App Store'
+                };
+            } else {
+                return {
+                    url: ANDROID_LINK,
+                    store: 'Google Play Store'
+                };
+            }
+        }
+        
+        // Simple analytics tracking (stores in memory only)
+        function trackClick(type, platform) {
+            const event = {
+                sessionId: sessionId,
+                type: type, // 'auto' or 'manual'
+                platform: platform,
+                timestamp: new Date().toISOString(),
+                userAgent: userAgent
+            };
+            
+            console.log('Analytics Event:', event);
+            // In a real implementation, you'd send this to your analytics service
+            // Example: fetch('/api/analytics', { method: 'POST', body: JSON.stringify(event) });
+        }
+        
+        // Update UI and redirect
+        function initializeRedirect() {
+            const platform = detectPlatform();
+            const redirectInfo = getRedirectInfo(platform);
+            
+            // Update platform display
+            document.getElementById('platform').textContent = platform;
+            document.getElementById('store').textContent = redirectInfo.store;
+            
+            // Countdown timer with progress bar
+            let countdown = 3;
+            const countdownElement = document.getElementById('countdown');
+            const progressElement = document.getElementById('progress');
+            
+            const timer = setInterval(() => {
+                countdown--;
+                countdownElement.textContent = countdown;
+                
+                // Update progress bar
+                const progressPercent = ((3 - countdown) / 3) * 100;
+                progressElement.style.width = (100 - progressPercent) + '%';
+                
+                if (countdown <= 0) {
+                    clearInterval(timer);
+                    
+                    // Track automatic redirect
+                    trackClick('auto', platform.toLowerCase());
+                    
+                    // Redirect to appropriate store
+                    window.location.href = redirectInfo.url;
+                }
+            }, 1000);
+            
+            // Optional: Immediate redirect (uncomment to skip countdown)
+            // trackClick('auto', platform.toLowerCase());
+            // window.location.href = redirectInfo.url;
+        }
+        
+        // Start the redirect process when page loads
+        document.addEventListener('DOMContentLoaded', initializeRedirect);
+        
+        // Fallback for older browsers
+        window.onload = initializeRedirect;
+    </script>
+</body>
+</html>
