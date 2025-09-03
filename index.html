@@ -6,97 +6,76 @@
     <title>Club Curve - Redirecting...</title>
     <meta name="description" content="Redirecting to the Club Curve app download page.">
     
-    <style>
-        body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background-color: #f0f0f0;
-            font-family: sans-serif;
-            color: #333;
-            text-align: center;
-            margin: 0;
-        }
+    <script>
+        (function() {
+            // Google Apps Script URL for analytics
+            const GOOGLE_APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbw0IyevL19S6_x16X8zOFJip8CT2kl92zPzuaeNNmijsKtYGtO9lWO0vvNc077dtoc/exec';
 
-        .message {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: #667eea;
-        }
-    </style>
+            // App store links
+            const IOS_LINK = 'https://apps.apple.com/in/app/club-curve/id6744392234';
+            const ANDROID_LINK = 'https://play.google.com/store/apps/details?id=com.krishnacurve.krishnacurve';
+            
+            // Generate a session ID and get user agent once per page load
+            const sessionId = 'session_' + Math.random().toString(36).substr(2, 9);
+            const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+            
+            // This function sends analytics data to the Google Sheet via the Apps Script.
+            async function sendAnalyticsData(data) {
+                const params = new URLSearchParams(data);
+                const url = `${GOOGLE_APPS_SCRIPT_URL}?${params.toString()}`;
+                
+                try {
+                    // Use fetch with 'GET' method, as Google Apps Script's doGet function handles this.
+                    await fetch(url, { method: 'GET' });
+                } catch (error) {
+                    console.error('Error sending analytics data:', error);
+                }
+            }
+            
+            // Detects the user's platform (iOS or Android).
+            function detectPlatform() {
+                if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+                    return 'iOS';
+                }
+                if (/android/i.test(userAgent)) {
+                    return 'Android';
+                }
+                return 'Android'; // Default to Android for other devices
+            }
+            
+            // Gets the correct redirect URL based on the detected platform.
+            function getRedirectInfo(platform) {
+                if (platform === 'iOS') {
+                    return { url: IOS_LINK };
+                }
+                return { url: ANDROID_LINK };
+            }
+            
+            // Main function to perform the redirect.
+            function initializeRedirect() {
+                const platform = detectPlatform();
+                const redirectInfo = getRedirectInfo(platform);
+
+                // Send analytics data for the automatic redirect.
+                const analyticsData = {
+                    sessionId: sessionId,
+                    type: 'auto_redirect',
+                    platform: platform,
+                    timestamp: new Date().toISOString(),
+                    userAgent: userAgent,
+                    referrer: document.referrer
+                };
+                sendAnalyticsData(analyticsData);
+
+                // Immediately redirect the user.
+                window.location.href = redirectInfo.url;
+            }
+            
+            // Start the process immediately.
+            initializeRedirect();
+        })();
+    </script>
 </head>
 <body>
-    <div class="message">
-        Redirecting you now...
-    </div>
-
-    <script>
-        // Google Apps Script URL for analytics
-        const GOOGLE_APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbw0IyevL19S6_x16X8zOFJip8CT2kl92zPzuaeNNmijsKtYGtO9lWO0vvNc077dtoc/exec';
-
-        // App store links
-        const IOS_LINK = 'https://apps.apple.com/in/app/club-curve/id6744392234';
-        const ANDROID_LINK = 'https://play.google.com/store/apps/details?id=com.krishnacurve.krishnacurve';
-        
-        // Generate a session ID and get user agent once per page load
-        const sessionId = 'session_' + Math.random().toString(36).substr(2, 9);
-        const userAgent = navigator.userAgent || navigator.vendor || window.opera;
-        
-        // This function sends analytics data to the Google Sheet via the Apps Script.
-        async function sendAnalyticsData(data) {
-            const params = new URLSearchParams(data);
-            const url = `${GOOGLE_APPS_SCRIPT_URL}?${params.toString()}`;
-            
-            try {
-                // Use fetch with 'GET' method, as Google Apps Script's doGet function handles this.
-                await fetch(url, { method: 'GET' });
-            } catch (error) {
-                console.error('Error sending analytics data:', error);
-            }
-        }
-        
-        // Detects the user's platform (iOS or Android).
-        function detectPlatform() {
-            if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
-                return 'iOS';
-            }
-            if (/android/i.test(userAgent)) {
-                return 'Android';
-            }
-            return 'Android'; // Default to Android for other devices
-        }
-        
-        // Gets the correct redirect URL based on the detected platform.
-        function getRedirectInfo(platform) {
-            if (platform === 'iOS') {
-                return { url: IOS_LINK };
-            }
-            return { url: ANDROID_LINK };
-        }
-        
-        // Main function to perform the redirect.
-        function initializeRedirect() {
-            const platform = detectPlatform();
-            const redirectInfo = getRedirectInfo(platform);
-
-            // Send analytics data for the automatic redirect.
-            const analyticsData = {
-                sessionId: sessionId,
-                type: 'auto_redirect',
-                platform: platform,
-                timestamp: new Date().toISOString(),
-                userAgent: userAgent,
-                referrer: document.referrer
-            };
-            sendAnalyticsData(analyticsData);
-
-            // Immediately redirect the user.
-            window.location.href = redirectInfo.url;
-        }
-        
-        // Start the process when the page loads.
-        window.onload = initializeRedirect;
-    </script>
 </body>
 </html>
