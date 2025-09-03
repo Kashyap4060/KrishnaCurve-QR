@@ -3,222 +3,84 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Club Curve - Download App</title>
-    <meta name="description" content="Download the Club Curve app for iOS and Android">
-    
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://clubcurvedynamicqr.dpdns.org/">
-    <meta property="og:title" content="Club Curve - Download App">
-    <meta property="og:description" content="Get the Club Curve app for the best experience!">
-    
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://clubcurvedynamicqr.dpdns.org/">
-    <meta property="twitter:title" content="Club Curve - Download App">
-    <meta property="twitter:description" content="Get the Club Curve app for the best experience!">
+    <title>Club Curve - Redirecting...</title>
+    <meta name="description" content="Redirecting to the Club Curve app download page.">
     
     <style>
-        /* General page styling - kept for the brief moment before redirect */
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            margin: 0;
-            padding: 20px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
             display: flex;
-            flex-direction: column;
-            align-items: center;
             justify-content: center;
-            color: white;
-            text-align: center;
-        }
-
-        .container {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: 40px;
-            max-width: 400px;
-            width: 100%;
-            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-            border: 1px solid rgba(255, 255, 255, 0.18);
-            animation: fadeIn 0.6s ease-out;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        h1 {
-            margin: 20px 0;
-            font-size: 28px;
-            font-weight: 700;
-        }
-
-        .description {
-            margin: 20px 0;
-            font-size: 16px;
-            opacity: 0.9;
-            line-height: 1.5;
-        }
-
-        .redirect-message {
-            font-size: 18px;
-            font-weight: bold;
-            margin: 20px 0;
-        }
-        
-        /* Styles for manual fallback links - this is a good practice for when automatic redirect fails */
-        .manual-links {
-            margin-top: 30px;
-        }
-
-        .store-button {
-            display: inline-block;
-            margin: 10px;
-            padding: 12px 24px;
-            background: rgba(255, 255, 255, 0.9);
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+            font-family: sans-serif;
             color: #333;
-            text-decoration: none;
-            border-radius: 10px;
-            font-weight: 600;
-            transition: transform 0.2s, background 0.2s;
-            border: none;
-            cursor: pointer;
-            font-size: 14px;
+            text-align: center;
+            margin: 0;
         }
 
-        .store-button:hover {
-            transform: translateY(-2px);
-            background: white;
-        }
-        
-        .stats {
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
-            padding: 15px;
-            margin-top: 20px;
-            font-size: 12px;
-            opacity: 0.8;
+        .message {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #667eea;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Club Curve</h1>
-        <div class="description">
-            Redirecting you to the appropriate app store...
-        </div>
-        
-        <div class="redirect-message" id="redirectMessage">
-            Detected: <span id="platform">Detecting device...</span>
-        </div>
-
-        <div class="manual-links">
-            <div style="margin-bottom: 15px; opacity: 0.8;">
-                If you are not redirected, click here:
-            </div>
-            <a href="https://apps.apple.com/in/app/club-curve/id6744392234" class="store-button" onclick="trackManualClick('iOS')">
-                📱 App Store (iOS)
-            </a>
-            <a href="https://play.google.com/store/apps/details?id=com.krishnacurve.krishnacurve" class="store-button" onclick="trackManualClick('Android')">
-                🤖 Google Play (Android)
-            </a>
-        </div>
-
-        <div class="stats" id="stats">
-            <div>Session: <span id="session-id"></span></div>
-            <div>User Agent: <span id="user-agent"></span></div>
-            <div>Timestamp: <span id="timestamp"></span></div>
-        </div>
+    <div class="message">
+        Redirecting you now...
     </div>
 
     <script>
-        // IMPORTANT: REPLACE THIS URL WITH YOUR DEPLOYED GOOGLE APPS SCRIPT WEB APP URL
-        const GOOGLE_APPS_SCRIPT_URL = https://script.google.com/macros/s/AKfycbw0IyevL19S6_x16X8zOFJip8CT2kl92zPzuaeNNmijsKtYGtO9lWO0vvNc077dtoc/exec;
+        // Google Apps Script URL for analytics
+        const GOOGLE_APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbw0IyevL19S6_x16X8zOFJip8CT2kl92zPzuaeNNmijsKtYGtO9lWO0vvNc077dtoc/exec';
 
         // App store links
         const IOS_LINK = 'https://apps.apple.com/in/app/club-curve/id6744392234';
         const ANDROID_LINK = 'https://play.google.com/store/apps/details?id=com.krishnacurve.krishnacurve';
         
-        // Generate a session ID once per page load
+        // Generate a session ID and get user agent once per page load
         const sessionId = 'session_' + Math.random().toString(36).substr(2, 9);
         const userAgent = navigator.userAgent || navigator.vendor || window.opera;
         
-        // This function sends analytics data to a Google Sheet via a Google Apps Script.
+        // This function sends analytics data to the Google Sheet via the Apps Script.
         async function sendAnalyticsData(data) {
-            console.log('Preparing to send data to Google Sheet:', data);
-            
-            // Construct a URL with query parameters
             const params = new URLSearchParams(data);
             const url = `${GOOGLE_APPS_SCRIPT_URL}?${params.toString()}`;
             
             try {
-                // Use fetch with 'GET' method, as Google Apps Script's doGet function handles this
-                const response = await fetch(url, { method: 'GET' });
-                if (response.ok) {
-                    console.log('Analytics data sent to Google Sheet successfully.');
-                } else {
-                    console.error('Failed to send analytics data to Google Sheet.', response.status);
-                }
+                // Use fetch with 'GET' method, as Google Apps Script's doGet function handles this.
+                await fetch(url, { method: 'GET' });
             } catch (error) {
                 console.error('Error sending analytics data:', error);
             }
         }
         
-        // Update stats display
-        function updateStats() {
-            document.getElementById('session-id').textContent = sessionId;
-            document.getElementById('user-agent').textContent = userAgent.substring(0, 50) + '...';
-            document.getElementById('timestamp').textContent = new Date().toLocaleString();
-        }
-        
-        // Detect platform
+        // Detects the user's platform (iOS or Android).
         function detectPlatform() {
-            // iOS detection (including iPad)
             if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
                 return 'iOS';
             }
-            
-            // Android detection
             if (/android/i.test(userAgent)) {
                 return 'Android';
             }
-            
-            // Default to Android for desktop/unknown
-            return 'Android';
+            return 'Android'; // Default to Android for other devices
         }
         
-        // Get redirect URL and store name
+        // Gets the correct redirect URL based on the detected platform.
         function getRedirectInfo(platform) {
             if (platform === 'iOS') {
-                return {
-                    url: IOS_LINK,
-                    store: 'App Store'
-                };
-            } else {
-                return {
-                    url: ANDROID_LINK,
-                    store: 'Google Play Store'
-                };
+                return { url: IOS_LINK };
             }
+            return { url: ANDROID_LINK };
         }
         
-        // Perform the immediate redirect
+        // Main function to perform the redirect.
         function initializeRedirect() {
-            // Update stats for the user to see
-            updateStats();
-            
-            // Get the platform and redirect info
             const platform = detectPlatform();
             const redirectInfo = getRedirectInfo(platform);
 
-            // Update UI to show detected platform
-            document.getElementById('platform').textContent = platform;
-
-            // Send analytics data for the automatic redirect
+            // Send analytics data for the automatic redirect.
             const analyticsData = {
                 sessionId: sessionId,
                 type: 'auto_redirect',
@@ -229,26 +91,12 @@
             };
             sendAnalyticsData(analyticsData);
 
-            // Immediately redirect the user
+            // Immediately redirect the user.
             window.location.href = redirectInfo.url;
         }
-
-        // Handle manual click analytics
-        function trackManualClick(platform) {
-            const analyticsData = {
-                sessionId: sessionId,
-                type: 'manual_click',
-                platform: platform,
-                timestamp: new Date().toISOString(),
-                userAgent: userAgent,
-                referrer: document.referrer
-            };
-            sendAnalyticsData(analyticsData);
-            // The browser will handle the redirect via the <a> tag's href
-        }
         
-        // Start the redirect process when the page loads
-        document.addEventListener('DOMContentLoaded', initializeRedirect);
+        // Start the process when the page loads.
+        window.onload = initializeRedirect;
     </script>
 </body>
 </html>
