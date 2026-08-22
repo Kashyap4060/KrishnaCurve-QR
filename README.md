@@ -4,7 +4,7 @@ A single QR code that redirects users to the correct app store based on their de
 
 - **Scan URL / QR target:** https://clubcurvedynamicqr.dpdns.org
 - **iOS →** https://apps.apple.com/in/app/oswin-ply-udaan/id6780872581
-- **Android →** https://play.google.com/store/apps/details?id=com.varient.oswin
+- **Android →** https://play.google.com/store/apps/details?id=com.varient.oswin&pcampaignid=web_share
 
 ## How it works
 
